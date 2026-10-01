@@ -1,18 +1,18 @@
-import { useTexture } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
-import { useLayoutEffect, useMemo, useRef } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import * as THREE from 'three'
 import {
   DEVICE,
+  createPaintedTexture,
   easeInOutCubic,
   lerp,
   type DeviceMode,
+  type ScreenAsset,
 } from '../lib/portfolio'
 
 type MorphDeviceProps = {
   mode: DeviceMode
-  phoneScreen: string
-  tabletScreen: string
+  asset: ScreenAsset
 }
 
 function buildRoundedShape(width: number, height: number, radius: number) {
@@ -32,7 +32,7 @@ function buildRoundedShape(width: number, height: number, radius: number) {
   return s
 }
 
-export function MorphDevice({ mode, phoneScreen, tabletScreen }: MorphDeviceProps) {
+export function MorphDevice({ mode, asset }: MorphDeviceProps) {
   const group = useRef<THREE.Group>(null)
   const shell = useRef<THREE.Mesh>(null)
   const screen = useRef<THREE.Mesh>(null)
@@ -44,14 +44,19 @@ export function MorphDevice({ mode, phoneScreen, tabletScreen }: MorphDeviceProp
   const modeRef = useRef(mode)
   modeRef.current = mode
 
-  const phoneTex = useTexture(phoneScreen)
-  const tabletTex = useTexture(tabletScreen)
+  const phoneTex = useMemo(
+    () => createPaintedTexture(asset.paintPhone, 390, 844),
+    [asset],
+  )
+  const tabletTex = useMemo(
+    () => createPaintedTexture(asset.paintTablet, 768, 1024),
+    [asset],
+  )
 
-  useLayoutEffect(() => {
-    for (const tex of [phoneTex, tabletTex]) {
-      tex.colorSpace = THREE.SRGBColorSpace
-      tex.anisotropy = 8
-      tex.needsUpdate = true
+  useEffect(() => {
+    return () => {
+      phoneTex.dispose()
+      tabletTex.dispose()
     }
   }, [phoneTex, tabletTex])
 

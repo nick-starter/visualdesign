@@ -84,12 +84,7 @@ function App() {
           </div>
 
           <div className="relative h-[min(62dvh,560px)] w-full lg:h-[min(82dvh,760px)]">
-            <DeviceScene
-              mode={mode}
-              phoneScreen={asset.phone}
-              tabletScreen={asset.tablet}
-              isMobile={isMobile}
-            />
+            <DeviceScene mode={mode} asset={asset} isMobile={isMobile} />
           </div>
         </section>
 
@@ -103,8 +98,9 @@ function App() {
             </h2>
             <p className="mt-4 max-w-[48ch] text-[var(--mist)]">
               Placeholder case studies ship with the folio so the 3D stage feels real on day one.
-              Replace the SVG assets under <code className="text-[var(--lime)]">public/screens/</code> — wire them in{' '}
-              <code className="text-[var(--lime)]">src/lib/portfolio.ts</code>.
+              Edit the canvas painters in <code className="text-[var(--lime)]">src/lib/portfolio.ts</code>,
+              or drop PNG/SVG files under <code className="text-[var(--lime)]">public/screens/</code> and
+              point the asset <code className="text-[var(--lime)]">phone</code>/<code className="text-[var(--lime)]">tablet</code> paths there.
             </p>
 
             <ul className="mt-12 space-y-0 border-t border-[color-mix(in_oklab,var(--fog)_12%,transparent)]">

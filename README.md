@@ -11,9 +11,15 @@ Interactive portfolio centerpiece: a realistic 3D phone that morphs into a portr
 
 ## Swap screen assets
 
-1. Drop your own mockups into `public/screens/` (SVG or PNG).
-2. Update paths in `src/lib/portfolio.ts` (`SCREEN_ASSETS` phone / tablet URLs).
+Screens are painted by canvas functions in `src/lib/portfolio.ts` (`paintPhone` / `paintTablet`) so the 3D stage never depends on fragile texture URLs.
+
+To customize:
+
+1. Edit the paint functions in `src/lib/portfolio.ts`, **or**
+2. Drop PNG/SVG mockups into `public/screens/` and set optional `phone` / `tablet` paths on a `SCREEN_ASSETS` entry (then wire image loading if you extend beyond the built-in painters).
 3. Prefer portrait art: phone ~390×844, tablet ~768×1024.
+
+Reference SVGs also live in `public/screens/` as design starting points.
 
 ## Local development
 
