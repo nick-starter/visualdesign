@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 768 1024" fill="none">
+  <defs>
+    <linearGradient id="tbg" x1="0" y1="0" x2="768" y2="1024" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0E1412"/>
+      <stop offset="1" stop-color="#161E1A"/>
+    </linearGradient>
+    <linearGradient id="card" x1="40" y1="180" x2="360" y2="420" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#254436"/>
+      <stop offset="1" stop-color="#1A2E28"/>
+    </linearGradient>
+  </defs>
+  <rect width="768" height="1024" fill="url(#tbg)"/>
+
+  <text x="40" y="64" fill="#8FA396" font-family="system-ui,sans-serif" font-size="14" font-weight="600">ATLAS DESKTOP</text>
+  <text x="40" y="110" fill="#F4F7F2" font-family="system-ui,sans-serif" font-size="42" font-weight="700">Workspace overview</text>
+  <text x="40" y="146" fill="#8FA396" font-family="system-ui,sans-serif" font-size="16">Week of Mar 16 · 4 active projects</text>
+
+  <rect x="520" y="72" width="96" height="40" rx="20" fill="#24302A"/>
+  <text x="548" y="97" fill="#C8F07A" font-family="system-ui,sans-serif" font-size="13" font-weight="600">Filter</text>
+  <rect x="628" y="72" width="100" height="40" rx="20" fill="#C8F07A"/>
+  <text x="648" y="97" fill="#0B1210" font-family="system-ui,sans-serif" font-size="13" font-weight="700">New task</text>
+
+  <rect x="40" y="188" width="330" height="260" rx="32" fill="url(#card)"/>
+  <text x="68" y="240" fill="#C8F07A" font-family="system-ui,sans-serif" font-size="13" font-weight="600">PRIMARY</text>
+  <text x="68" y="288" fill="#F4F7F2" font-family="system-ui,sans-serif" font-size="30" font-weight="700">Brand systems</text>
+  <text x="68" y="324" fill="#B7C8BC" font-family="system-ui,sans-serif" font-size="15">Token audit · component map</text>
+  <rect x="68" y="360" width="180" height="10" rx="5" fill="#1A2420"/>
+  <rect x="68" y="360" width="126" height="10" rx="5" fill="#C8F07A"/>
+  <text x="68" y="400" fill="#8FA396" font-family="system-ui,sans-serif" font-size="13">70% complete</text>
+
+  <rect x="398" y="188" width="330" height="120" rx="28" fill="#1A2420"/>
+  <text x="426" y="236" fill="#8FA396" font-family="system-ui,sans-serif" font-size="13">Team load</text>
+  <text x="426" y="278" fill="#F4F7F2" font-family="system-ui,sans-serif" font-size="36" font-weight="700">68%</text>
+
+  <rect x="398" y="328" width="158" height="120" rx="28" fill="#1A2420"/>
+  <text x="422" y="376" fill="#8FA396" font-family="system-ui,sans-serif" font-size="13">Shipped</text>
+  <text x="422" y="416" fill="#F4F7F2" font-family="system-ui,sans-serif" font-size="32" font-weight="700">12</text>
+
+  <rect x="570" y="328" width="158" height="120" rx="28" fill="#1A2420"/>
+  <text x="594" y="376" fill="#8FA396" font-family="system-ui,sans-serif" font-size="13">Blocked</text>
+  <text x="594" y="416" fill="#E8C27A" font-family="system-ui,sans-serif" font-size="32" font-weight="700">2</text>
+
+  <text x="40" y="510" fill="#F4F7F2" font-family="system-ui,sans-serif" font-size="22" font-weight="600">Board</text>
+
+  <rect x="40" y="540" width="220" height="360" rx="24" fill="#1A2420"/>
+  <text x="64" y="580" fill="#8FA396" font-family="system-ui,sans-serif" font-size="13" font-weight="600">BACKLOG</text>
+  <rect x="64" y="608" width="172" height="72" rx="16" fill="#24302A"/>
+  <text x="80" y="640" fill="#F4F7F2" font-family="system-ui,sans-serif" font-size="14" font-weight="600">Icon set v2</text>
+  <text x="80" y="662" fill="#8FA396" font-family="system-ui,sans-serif" font-size="12">Design · 3h</text>
+  <rect x="64" y="696" width="172" height="72" rx="16" fill="#24302A"/>
+  <text x="80" y="728" fill="#F4F7F2" font-family="system-ui,sans-serif" font-size="14" font-weight="600">Onboarding copy</text>
+  <text x="80" y="750" fill="#8FA396" font-family="system-ui,sans-serif" font-size="12">Content · 2h</text>
+
+  <rect x="280" y="540" width="220" height="360" rx="24" fill="#1A2420"/>
+  <text x="304" y="580" fill="#C8F07A" font-family="system-ui,sans-serif" font-size="13" font-weight="600">IN PROGRESS</text>
+  <rect x="304" y="608" width="172" height="88" rx="16" fill="#254436"/>
+  <text x="320" y="644" fill="#F4F7F2" font-family="system-ui,sans-serif" font-size="14" font-weight="600">Brand systems</text>
+  <text x="320" y="668" fill="#B7C8BC" font-family="system-ui,sans-serif" font-size="12">Design · Due today</text>
+  <rect x="304" y="712" width="172" height="72" rx="16" fill="#24302A"/>
+  <text x="320" y="744" fill="#F4F7F2" font-family="system-ui,sans-serif" font-size="14" font-weight="600">Motion pass</text>
+  <text x="320" y="766" fill="#8FA396" font-family="system-ui,sans-serif" font-size="12">Prototype · 90m</text>
+
+  <rect x="520" y="540" width="208" height="360" rx="24" fill="#1A2420"/>
+  <text x="544" y="580" fill="#8FA396" font-family="system-ui,sans-serif" font-size="13" font-weight="600">REVIEW</text>
+  <rect x="544" y="608" width="160" height="72" rx="16" fill="#24302A"/>
+  <text x="560" y="640" fill="#F4F7F2" font-family="system-ui,sans-serif" font-size="14" font-weight="600">Client review</text>
+  <text x="560" y="662" fill="#8FA396" font-family="system-ui,sans-serif" font-size="12">12:30 today</text>
+  <rect x="544" y="696" width="160" height="72" rx="16" fill="#24302A"/>
+  <text x="560" y="728" fill="#F4F7F2" font-family="system-ui,sans-serif" font-size="14" font-weight="600">Nav study</text>
+  <text x="560" y="750" fill="#8FA396" font-family="system-ui,sans-serif" font-size="12">Waiting on eng</text>
+</svg>
