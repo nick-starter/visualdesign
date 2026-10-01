@@ -37,14 +37,17 @@ npm run preview  # preview the production build
 
 ## GitHub Pages
 
-This repo is configured for static GitHub Pages deploy:
+Repo: [nick-starter/visualdesign](https://github.com/nick-starter/visualdesign)  
+Expected site URL: **https://nick-starter.github.io/visualdesign/**
 
-1. **Actions workflow** — `.github/workflows/deploy-pages.yml` builds on push to `main` and deploys the `dist/` folder.
-2. **Vite `base: './'`** — relative asset paths work for both user and project Pages sites.
-3. **Enable Pages** (one-time, in the GitHub UI):
+Configured for GitHub **project** Pages:
+
+1. **Actions workflow** — `.github/workflows/deploy-pages.yml` builds on push to `main` and deploys `dist/`.
+2. **Vite `base`** — `/visualdesign/` in GitHub Actions (`GITHUB_ACTIONS`), `/` locally for `npm run dev`.
+3. **Enable Pages** (one-time if not already set):
    - Repo **Settings → Pages**
    - **Source**: GitHub Actions
-   - After the workflow runs on `main`, the site URL appears on the Pages settings page.
+   - Merge to `main` (or run the workflow), then wait for the deploy job.
 
 Optional manual deploy with `gh-pages`:
 

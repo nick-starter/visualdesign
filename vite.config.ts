@@ -2,11 +2,13 @@ import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 
-// Relative base keeps assets working on GitHub Pages project sites
-// (https://user.github.io/repo-name/) and locally.
+// Project Pages site: https://nick-starter.github.io/visualdesign/
+// GITHUB_ACTIONS is set automatically in the deploy workflow.
+const base = process.env.GITHUB_ACTIONS ? '/visualdesign/' : '/'
+
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: './',
+  base,
   server: {
     host: '0.0.0.0',
     port: 43127,
