@@ -78,35 +78,35 @@ export function DeviceScene({ mode, asset, isMobile }: DeviceSceneProps) {
     <div className="canvas-shell absolute inset-0">
       <WebGLErrorBoundary fallback={<FlatDevicePreview mode={mode} asset={asset} />}>
         <Canvas
-          shadows
-          dpr={[1, isMobile ? 1.5 : 2]}
+          shadows={false}
+          dpr={[1, isMobile ? 1.25 : 1.75]}
           camera={{ position: [0, 0.12, isMobile ? 3.55 : 3.15], fov: isMobile ? 40 : 34 }}
-          gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
+          gl={{
+            antialias: true,
+            alpha: true,
+            powerPreference: 'high-performance',
+            failIfMajorPerformanceCaveat: false,
+          }}
           onCreated={({ gl }) => {
             gl.setClearColor(0x000000, 0)
           }}
         >
-          <ambientLight intensity={0.62} />
-          <directionalLight
-            castShadow
-            position={[3.2, 4.8, 2.4]}
-            intensity={1.45}
-            shadow-mapSize={[1024, 1024]}
-          />
-          <directionalLight position={[-2.5, 1.5, -1]} intensity={0.35} color="#9ab8a8" />
+          <ambientLight intensity={0.7} />
+          <directionalLight position={[3.2, 4.8, 2.4]} intensity={1.35} />
+          <directionalLight position={[-2.5, 1.5, -1]} intensity={0.4} color="#9ab8a8" />
           <spotLight
             position={[-2.8, 2.2, 2]}
-            intensity={0.55}
+            intensity={0.45}
             angle={0.55}
             penumbra={0.65}
             color="#c8f07a"
           />
-          <hemisphereLight args={['#dce6df', '#0b1210', 0.35]} />
+          <hemisphereLight args={['#dce6df', '#0b1210', 0.4]} />
           <Suspense fallback={<SceneFallback />}>
             <MorphDevice mode={mode} asset={asset} />
             <ContactShadows
               position={[0, -1.08, 0]}
-              opacity={0.42}
+              opacity={0.38}
               scale={8}
               blur={2.8}
               far={3}
