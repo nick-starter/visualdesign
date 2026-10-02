@@ -1,0 +1,129 @@
+@import 'tailwindcss';
+
+:root {
+  --ink: #070a09;
+  --ink-soft: #0e1412;
+  --fog: #dce6df;
+  --mist: #9aada0;
+  --lime: #c8f07a;
+  --lime-dim: #9bc25a;
+  --sand: #e8c27a;
+  --panel: rgba(18, 26, 22, 0.72);
+  --font-display: 'Syne', system-ui, sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--fog);
+  background: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--lime) 45%, transparent);
+  color: var(--ink);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(2%, -1.5%, 0) scale(1.04);
+  }
+}
+
+@keyframes pulse-line {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+.animate-rise {
+  animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-rise-delay {
+  animation: rise 1s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+
+.animate-rise-delay-2 {
+  animation: rise 1s cubic-bezier(0.22, 1, 0.36, 1) 0.28s both;
+}
+
+.atmosphere {
+  position: absolute;
+  inset: -10%;
+  background:
+    radial-gradient(ellipse 55% 45% at 18% 20%, rgba(200, 240, 122, 0.14), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 82% 30%, rgba(90, 140, 120, 0.18), transparent 60%),
+    radial-gradient(ellipse 70% 55% at 50% 100%, rgba(40, 70, 55, 0.35), transparent 70%),
+    linear-gradient(165deg, #050807 0%, #0b1210 42%, #101816 100%);
+  animation: drift 18s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.atmosphere::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+
+.brand-mark {
+  font-family: var(--font-display);
+  letter-spacing: -0.04em;
+}
+
+.serif-accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.device-hint {
+  animation: pulse-line 2.8s ease-in-out infinite;
+}
+
+.canvas-shell canvas {
+  touch-action: none;
+}

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 844" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="390" y2="844" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F1614"/>
+      <stop offset="1" stop-color="#18211C"/>
+    </linearGradient>
+    <linearGradient id="hero" x1="24" y1="120" x2="366" y2="320" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2A4A3A"/>
+      <stop offset="1" stop-color="#1A2E28"/>
+    </linearGradient>
+  </defs>
+  <rect width="390" height="844" fill="url(#bg)"/>
+  <rect x="24" y="28" width="42" height="42" rx="14" fill="#C8F07A"/>
+  <text x="78" y="48" fill="#F4F7F2" font-family="system-ui,sans-serif" font-size="15" font-weight="600">Atlas</text>
+  <text x="78" y="66" fill="#8FA396" font-family="system-ui,sans-serif" font-size="11">Morning focus</text>
+  <circle cx="342" cy="49" r="16" fill="#24302A"/>
+  <circle cx="342" cy="49" r="7" fill="#C8F07A"/>
+
+  <text x="24" y="118" fill="#F4F7F2" font-family="system-ui,sans-serif" font-size="34" font-weight="700">Todays plan</text>
+  <text x="24" y="148" fill="#8FA396" font-family="system-ui,sans-serif" font-size="14">3 sessions · 2h 10m reserved</text>
+
+  <rect x="24" y="178" width="342" height="168" rx="28" fill="url(#hero)"/>
+  <text x="48" y="228" fill="#C8F07A" font-family="system-ui,sans-serif" font-size="12" font-weight="600">DEEP WORK</text>
+  <text x="48" y="262" fill="#F4F7F2" font-family="system-ui,sans-serif" font-size="28" font-weight="700">Brand systems</text>
+  <text x="48" y="292" fill="#B7C8BC" font-family="system-ui,sans-serif" font-size="14">09:30  11:00 · Studio east</text>
+  <rect x="48" y="310" width="96" height="18" rx="9" fill="#C8F07A" fill-opacity="0.18"/>
+  <text x="60" y="323" fill="#C8F07A" font-family="system-ui,sans-serif" font-size="11">In progress</text>
+
+  <text x="24" y="398" fill="#F4F7F2" font-family="system-ui,sans-serif" font-size="18" font-weight="600">Up next</text>
+
+  <rect x="24" y="420" width="342" height="88" rx="22" fill="#1A2420"/>
+  <rect x="40" y="440" width="48" height="48" rx="14" fill="#3D5C4A"/>
+  <text x="104" y="460" fill="#F4F7F2" font-family="system-ui,sans-serif" font-size="15" font-weight="600">Client review</text>
+  <text x="104" y="482" fill="#8FA396" font-family="system-ui,sans-serif" font-size="12">12:30 · Loom + notes</text>
+  <text x="320" y="468" fill="#C8F07A" font-family="system-ui,sans-serif" font-size="12" font-weight="600">45m</text>
+
+  <rect x="24" y="524" width="342" height="88" rx="22" fill="#1A2420"/>
+  <rect x="40" y="544" width="48" height="48" rx="14" fill="#4A3D2A"/>
+  <text x="104" y="564" fill="#F4F7F2" font-family="system-ui,sans-serif" font-size="15" font-weight="600">Motion pass</text>
+  <text x="104" y="586" fill="#8FA396" font-family="system-ui,sans-serif" font-size="12">15:00 · Prototype polish</text>
+  <text x="320" y="572" fill="#E8C27A" font-family="system-ui,sans-serif" font-size="12" font-weight="600">90m</text>
+
+  <rect x="24" y="640" width="162" height="110" rx="24" fill="#1A2420"/>
+  <text x="44" y="680" fill="#8FA396" font-family="system-ui,sans-serif" font-size="12">Focus score</text>
+  <text x="44" y="716" fill="#F4F7F2" font-family="system-ui,sans-serif" font-size="32" font-weight="700">92</text>
+
+  <rect x="204" y="640" width="162" height="110" rx="24" fill="#1A2420"/>
+  <text x="224" y="680" fill="#8FA396" font-family="system-ui,sans-serif" font-size="12">Streak</text>
+  <text x="224" y="716" fill="#F4F7F2" font-family="system-ui,sans-serif" font-size="32" font-weight="700">18d</text>
+
+  <rect x="48" y="780" width="294" height="4" rx="2" fill="#2A3630"/>
+</svg>
