@@ -63,7 +63,8 @@ function FlatDevicePreview({ mode, asset }: { mode: DeviceMode; asset: ScreenAss
       <div
         className="overflow-hidden rounded-[2rem] border border-[color-mix(in_oklab,var(--fog)_18%,transparent)] bg-[#171c19] shadow-[0_30px_80px_rgba(0,0,0,0.45)] transition-all duration-700"
         style={{
-          width: mode === 'tablet' ? 'min(52vw, 320px)' : 'min(42vw, 220px)',
+          // ~30% smaller than the prior flat preview sizes
+          width: mode === 'tablet' ? 'min(36vw, 224px)' : 'min(29vw, 154px)',
           aspectRatio: mode === 'tablet' ? '3 / 4' : '9 / 19',
         }}
       >
@@ -103,14 +104,17 @@ export function DeviceScene({ mode, asset, isMobile }: DeviceSceneProps) {
           />
           <hemisphereLight args={['#dce6df', '#0b1210', 0.4]} />
           <Suspense fallback={<SceneFallback />}>
-            <MorphDevice mode={mode} asset={asset} />
-            <ContactShadows
-              position={[0, -1.08, 0]}
-              opacity={0.38}
-              scale={8}
-              blur={2.8}
-              far={3}
-            />
+            {/* ~30% smaller on-screen presence; framing/controls stay the same */}
+            <group scale={0.7}>
+              <MorphDevice mode={mode} asset={asset} />
+              <ContactShadows
+                position={[0, -1.08, 0]}
+                opacity={0.38}
+                scale={8}
+                blur={2.8}
+                far={3}
+              />
+            </group>
           </Suspense>
           <OrbitControls
             enablePan={false}
