@@ -55,7 +55,7 @@ function App() {
             boxShadow: '0 8px 28px rgba(0,0,0,0.35)',
           }}
         >
-          {mode === 'phone' ? 'Morph to iPad' : 'Morph to phone'}
+          {mode === 'phone' ? 'Show iPad' : 'Show iPhone'}
         </button>
         <button
           type="button"
