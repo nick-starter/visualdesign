@@ -44,31 +44,129 @@ class WebGLErrorBoundary extends Component<
 
 function FlatDevicePreview({ mode, asset }: { mode: DeviceMode; asset: ScreenAsset }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const isPhone = mode === 'phone'
 
   useEffect(() => {
     const node = canvasRef.current
     if (!node) return
-    const w = mode === 'tablet' ? 768 : 390
-    const h = mode === 'tablet' ? 1024 : 844
+    const w = isPhone ? 390 : 768
+    const h = isPhone ? 844 : 1024
     node.width = w
     node.height = h
     const ctx = node.getContext('2d')
     if (!ctx) return
-    if (mode === 'tablet') asset.paintTablet(ctx, w, h)
-    else asset.paintPhone(ctx, w, h)
-  }, [mode, asset])
+    if (isPhone) asset.paintPhone(ctx, w, h)
+    else asset.paintTablet(ctx, w, h)
+
+    // Dynamic Island overlay for phone fallback
+    if (isPhone) {
+      const ix = w / 2
+      const iy = 28
+      const iw = 118
+      const ih = 34
+      ctx.fillStyle = '#050506'
+      ctx.beginPath()
+      ctx.roundRect(ix - iw / 2, iy - ih / 2, iw, ih, ih / 2)
+      ctx.fill()
+      ctx.beginPath()
+      ctx.fillStyle = '#1a2740'
+      ctx.arc(ix + 28, iy, 6, 0, Math.PI * 2)
+      ctx.fill()
+      ctx.beginPath()
+      ctx.fillStyle = '#222'
+      ctx.arc(ix - 14, iy, 3.5, 0, Math.PI * 2)
+      ctx.fill()
+    }
+  }, [mode, asset, isPhone])
 
   return (
     <div className="flex h-full items-center justify-center p-6">
       <div
-        className="overflow-hidden rounded-[2rem] border border-[color-mix(in_oklab,var(--fog)_18%,transparent)] bg-[#171c19] shadow-[0_30px_80px_rgba(0,0,0,0.45)] transition-all duration-700"
+        className="relative transition-all duration-700"
         style={{
-          // ~30% smaller than the prior flat preview sizes
-          width: mode === 'tablet' ? 'min(36vw, 224px)' : 'min(29vw, 154px)',
-          aspectRatio: mode === 'tablet' ? '3 / 4' : '9 / 19',
+          width: isPhone ? 'min(29vw, 154px)' : 'min(36vw, 224px)',
+          aspectRatio: isPhone ? '9 / 19.5' : '3 / 4',
         }}
       >
-        <canvas ref={canvasRef} className="h-full w-full" />
+        {/* Titanium chassis */}
+        <div
+          className="absolute inset-0 shadow-[0_28px_70px_rgba(0,0,0,0.55)]"
+          style={{
+            borderRadius: isPhone ? '22% / 11%' : '12% / 9%',
+            background:
+              'linear-gradient(145deg, #a8adb4 0%, #7c8188 38%, #9aa0a7 62%, #6e737a 100%)',
+            boxShadow:
+              '0 28px 70px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.35), inset 0 -1px 0 rgba(0,0,0,0.35)',
+          }}
+        />
+        {/* Side buttons */}
+        {isPhone && (
+          <>
+            <div
+              className="absolute"
+              style={{
+                right: -3,
+                top: '28%',
+                width: 3,
+                height: '9%',
+                borderRadius: 2,
+                background: 'linear-gradient(90deg, #7a7f86, #b0b5bc)',
+              }}
+            />
+            <div
+              className="absolute"
+              style={{
+                left: -3,
+                top: '22%',
+                width: 3,
+                height: '4%',
+                borderRadius: 2,
+                background: 'linear-gradient(90deg, #b0b5bc, #7a7f86)',
+              }}
+            />
+            <div
+              className="absolute"
+              style={{
+                left: -3,
+                top: '30%',
+                width: 3,
+                height: '6%',
+                borderRadius: 2,
+                background: 'linear-gradient(90deg, #b0b5bc, #7a7f86)',
+              }}
+            />
+            <div
+              className="absolute"
+              style={{
+                left: -3,
+                top: '38%',
+                width: 3,
+                height: '6%',
+                borderRadius: 2,
+                background: 'linear-gradient(90deg, #b0b5bc, #7a7f86)',
+              }}
+            />
+          </>
+        )}
+        {/* Screen well */}
+        <div
+          className="absolute overflow-hidden bg-black"
+          style={{
+            inset: isPhone ? '1.6%' : '2.8%',
+            borderRadius: isPhone ? '19% / 9.5%' : '9% / 7%',
+            boxShadow: 'inset 0 0 0 1px rgba(0,0,0,0.65)',
+          }}
+        >
+          <canvas ref={canvasRef} className="h-full w-full" />
+          {/* Glass sheen */}
+          <div
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background:
+                'linear-gradient(125deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.02) 32%, transparent 48%)',
+            }}
+          />
+        </div>
       </div>
     </div>
   )
@@ -92,17 +190,18 @@ export function DeviceScene({ mode, asset, isMobile }: DeviceSceneProps) {
             gl.setClearColor(0x000000, 0)
           }}
         >
-          <ambientLight intensity={0.7} />
-          <directionalLight position={[3.2, 4.8, 2.4]} intensity={1.35} />
-          <directionalLight position={[-2.5, 1.5, -1]} intensity={0.4} color="#9ab8a8" />
+          <ambientLight intensity={0.45} />
+          <hemisphereLight args={['#e8eef5', '#1a1c18', 0.55]} />
+          <directionalLight position={[3.4, 5.2, 2.8]} intensity={1.55} color="#fff6ea" />
+          <directionalLight position={[-3.2, 2.4, 1.2]} intensity={0.55} color="#b8c4d8" />
+          <directionalLight position={[0.6, 1.2, -3.5]} intensity={0.65} color="#dfe7f2" />
           <spotLight
-            position={[-2.8, 2.2, 2]}
-            intensity={0.45}
-            angle={0.55}
-            penumbra={0.65}
+            position={[-2.4, 3.2, 2.4]}
+            intensity={0.55}
+            angle={0.5}
+            penumbra={0.7}
             color="#c8f07a"
           />
-          <hemisphereLight args={['#dce6df', '#0b1210', 0.4]} />
           <Suspense fallback={<SceneFallback />}>
             {/* ~30% smaller on-screen presence; framing/controls stay the same */}
             <group scale={0.7}>
