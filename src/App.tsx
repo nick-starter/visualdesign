@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react'
-import { createPortal } from 'react-dom'
 import { DeviceScene, useIsMobile } from './components/DeviceScene'
 import {
   SCREEN_ASSETS,
@@ -104,9 +103,7 @@ function App() {
         </div>
       </main>
 
-      {typeof document !== 'undefined'
-        ? createPortal(controls, document.body)
-        : controls}
+      {controls}
     </div>
   )
 }

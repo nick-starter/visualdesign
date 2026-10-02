@@ -91,12 +91,13 @@ function FlatDevicePreview({ mode, asset }: { mode: DeviceMode; asset: ScreenAss
   }, [mode, asset, isPhone])
 
   return (
-    <div className="flex h-full items-center justify-center p-6">
+    <div className="flex h-full w-full items-center justify-center p-6 pb-24">
       <div
         key={mode}
         className="relative animate-rise"
         style={{
-          width: isPhone ? 'min(29vw, 154px)' : 'min(52vw, 320px)',
+          width: isPhone ? 'min(28vw, 150px)' : 'min(48vw, 300px)',
+          maxHeight: '70vh',
           aspectRatio: isPhone ? '9 / 19.5' : '4 / 3',
         }}
       >
