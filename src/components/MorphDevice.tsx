@@ -134,13 +134,13 @@ export function MorphDevice({ mode, asset }: MorphDeviceProps) {
 
     if (group.current) {
       const time = state.clock.elapsedTime
-      group.current.position.y = Math.sin(time * 0.7) * 0.032
-      group.current.rotation.y = -0.32 + Math.sin(time * 0.22) * 0.06
+      group.current.position.y = Math.sin(time * 0.7) * 0.028
+      group.current.rotation.y = -0.28 + Math.sin(time * 0.22) * 0.05
     }
   })
 
   return (
-    <group ref={group} position={[0, -0.04, 0]} rotation={[-0.1, 0, 0.03]}>
+    <group ref={group} position={[0, 0.02, 0]} rotation={[-0.08, 0, 0.02]}>
       <mesh ref={shell} castShadow receiveShadow>
         <extrudeGeometry args={[baseShape, extrudeSettings]} />
         <meshStandardMaterial
