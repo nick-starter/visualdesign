@@ -80,7 +80,7 @@ export function DeviceScene({ mode, asset, isMobile }: DeviceSceneProps) {
         <Canvas
           shadows={false}
           dpr={[1, isMobile ? 1.25 : 1.75]}
-          camera={{ position: [0, 0.12, isMobile ? 3.55 : 3.15], fov: isMobile ? 40 : 34 }}
+          camera={{ position: [0, 0.05, isMobile ? 3.4 : 3.05], fov: isMobile ? 38 : 32 }}
           gl={{
             antialias: true,
             alpha: true,
@@ -119,7 +119,7 @@ export function DeviceScene({ mode, asset, isMobile }: DeviceSceneProps) {
             maxPolarAngle={Math.PI / 1.7}
             minDistance={2.3}
             maxDistance={4.6}
-            target={[0, -0.05, 0]}
+            target={[0, 0.02, 0]}
             rotateSpeed={isMobile ? 0.5 : 0.72}
           />
         </Canvas>
