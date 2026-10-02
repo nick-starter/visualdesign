@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { DeviceScene, useIsMobile } from './components/DeviceScene'
 import {
   SCREEN_ASSETS,
@@ -15,11 +16,77 @@ function App() {
     [assetId],
   )
 
+  const controls = (
+    <div
+      style={{
+        position: 'fixed',
+        left: 0,
+        right: 0,
+        bottom: 0,
+        zIndex: 9999,
+        display: 'flex',
+        justifyContent: 'center',
+        padding: '0 1rem max(1.5rem, env(safe-area-inset-bottom))',
+        pointerEvents: 'none',
+      }}
+    >
+      <div
+        style={{
+          pointerEvents: 'auto',
+          display: 'flex',
+          flexWrap: 'wrap',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '0.75rem',
+        }}
+      >
+        <button
+          type="button"
+          onClick={() => setMode((m) => (m === 'phone' ? 'tablet' : 'phone'))}
+          style={{
+            borderRadius: 9999,
+            background: '#c8f07a',
+            color: '#070a09',
+            border: 'none',
+            padding: '0.65rem 1.25rem',
+            fontSize: '0.875rem',
+            fontWeight: 600,
+            cursor: 'pointer',
+            boxShadow: '0 8px 28px rgba(0,0,0,0.35)',
+          }}
+        >
+          {mode === 'phone' ? 'Morph to iPad' : 'Morph to phone'}
+        </button>
+        <button
+          type="button"
+          onClick={() =>
+            setAssetId((id) =>
+              id === SCREEN_ASSETS[0].id ? SCREEN_ASSETS[1].id : SCREEN_ASSETS[0].id,
+            )
+          }
+          style={{
+            borderRadius: 9999,
+            background: 'rgba(0,0,0,0.55)',
+            color: '#dce6df',
+            border: '1px solid rgba(255,255,255,0.22)',
+            padding: '0.65rem 1.25rem',
+            fontSize: '0.875rem',
+            fontWeight: 500,
+            cursor: 'pointer',
+            backdropFilter: 'blur(12px)',
+            boxShadow: '0 8px 28px rgba(0,0,0,0.35)',
+          }}
+        >
+          Swap case study
+        </button>
+      </div>
+    </div>
+  )
+
   return (
     <div className="relative h-dvh overflow-hidden text-[var(--fog)]">
       <div className="atmosphere" aria-hidden />
 
-      {/* Full-viewport centered device */}
       <main className="absolute inset-0 z-10">
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="relative h-full w-full max-h-dvh">
@@ -28,29 +95,9 @@ function App() {
         </div>
       </main>
 
-      {/* Controls — bottom center (fixed so WebGL canvas cannot cover them) */}
-      <div className="pointer-events-none fixed inset-x-0 bottom-0 z-50 flex justify-center px-4 pb-[max(1.5rem,env(safe-area-inset-bottom))]">
-        <div className="pointer-events-auto flex flex-wrap items-center justify-center gap-3">
-          <button
-            type="button"
-            onClick={() => setMode((m) => (m === 'phone' ? 'tablet' : 'phone'))}
-            className="rounded-full bg-[#c8f07a] px-5 py-2.5 text-sm font-semibold text-[#070a09] shadow-[0_8px_28px_rgba(0,0,0,0.35)] transition-transform hover:scale-[1.02] active:scale-[0.98]"
-          >
-            {mode === 'phone' ? 'Morph to iPad' : 'Morph to phone'}
-          </button>
-          <button
-            type="button"
-            onClick={() =>
-              setAssetId((id) =>
-                id === SCREEN_ASSETS[0].id ? SCREEN_ASSETS[1].id : SCREEN_ASSETS[0].id,
-              )
-            }
-            className="rounded-full border border-white/20 bg-black/50 px-5 py-2.5 text-sm font-medium text-[#dce6df] shadow-[0_8px_28px_rgba(0,0,0,0.35)] backdrop-blur-md transition-colors hover:border-[#c8f07a] hover:text-[#c8f07a]"
-          >
-            Swap case study
-          </button>
-        </div>
-      </div>
+      {typeof document !== 'undefined'
+        ? createPortal(controls, document.body)
+        : controls}
     </div>
   )
 }
