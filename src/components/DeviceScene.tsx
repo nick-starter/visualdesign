@@ -8,7 +8,7 @@ import {
   useState,
   type ReactNode,
 } from 'react'
-import type { DeviceMode, ScreenAsset } from '../lib/portfolio'
+import { SCREEN_SIZE, type DeviceMode, type ScreenAsset } from '../lib/portfolio'
 import { MorphDevice } from './MorphDevice'
 
 type DeviceSceneProps = {
@@ -49,8 +49,8 @@ function FlatDevicePreview({ mode, asset }: { mode: DeviceMode; asset: ScreenAss
   useEffect(() => {
     const node = canvasRef.current
     if (!node) return
-    const w = isPhone ? 390 : 768
-    const h = isPhone ? 844 : 1024
+    const w = isPhone ? SCREEN_SIZE.phone.w : SCREEN_SIZE.tablet.w
+    const h = isPhone ? SCREEN_SIZE.phone.h : SCREEN_SIZE.tablet.h
     node.width = w
     node.height = h
     const ctx = node.getContext('2d')
@@ -58,7 +58,6 @@ function FlatDevicePreview({ mode, asset }: { mode: DeviceMode; asset: ScreenAss
     if (isPhone) asset.paintPhone(ctx, w, h)
     else asset.paintTablet(ctx, w, h)
 
-    // Dynamic Island overlay for phone fallback
     if (isPhone) {
       const ix = w / 2
       const iy = 28
@@ -76,32 +75,45 @@ function FlatDevicePreview({ mode, asset }: { mode: DeviceMode; asset: ScreenAss
       ctx.fillStyle = '#222'
       ctx.arc(ix - 14, iy, 3.5, 0, Math.PI * 2)
       ctx.fill()
+    } else {
+      // Landscape iPad front camera cue
+      const cx = w / 2
+      const cy = 18
+      ctx.beginPath()
+      ctx.fillStyle = '#2a2d33'
+      ctx.arc(cx, cy, 7, 0, Math.PI * 2)
+      ctx.fill()
+      ctx.beginPath()
+      ctx.fillStyle = '#152033'
+      ctx.arc(cx, cy, 4.5, 0, Math.PI * 2)
+      ctx.fill()
     }
   }, [mode, asset, isPhone])
 
   return (
-    <div className="flex h-full items-center justify-center p-6">
+    <div className="flex h-full w-full items-center justify-center p-6 pb-24">
       <div
         key={mode}
         className="relative animate-rise"
         style={{
-          width: isPhone ? 'min(29vw, 154px)' : 'min(36vw, 224px)',
-          aspectRatio: isPhone ? '9 / 19.5' : '3 / 4',
+          width: isPhone ? 'min(28vw, 150px)' : 'min(48vw, 300px)',
+          maxHeight: '70vh',
+          aspectRatio: isPhone ? '9 / 19.5' : '4 / 3',
         }}
       >
-        {/* Titanium chassis */}
         <div
           className="absolute inset-0 shadow-[0_28px_70px_rgba(0,0,0,0.55)]"
           style={{
-            borderRadius: isPhone ? '22% / 11%' : '12% / 9%',
-            background:
-              'linear-gradient(145deg, #a8adb4 0%, #7c8188 38%, #9aa0a7 62%, #6e737a 100%)',
+            borderRadius: isPhone ? '22% / 11%' : '8% / 10%',
+            background: isPhone
+              ? 'linear-gradient(145deg, #a8adb4 0%, #7c8188 38%, #9aa0a7 62%, #6e737a 100%)'
+              : 'linear-gradient(145deg, #b4b8be 0%, #8a8f96 40%, #a2a7ae 65%, #757a81 100%)',
             boxShadow:
               '0 28px 70px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.35), inset 0 -1px 0 rgba(0,0,0,0.35)',
           }}
         />
         {/* Side buttons */}
-        {isPhone && (
+        {isPhone ? (
           <>
             <div
               className="absolute"
@@ -148,18 +160,52 @@ function FlatDevicePreview({ mode, asset }: { mode: DeviceMode; asset: ScreenAss
               }}
             />
           </>
+        ) : (
+          <>
+            <div
+              className="absolute"
+              style={{
+                right: -3,
+                top: '38%',
+                width: 3,
+                height: '10%',
+                borderRadius: 2,
+                background: 'linear-gradient(90deg, #8a8f96, #c0c4ca)',
+              }}
+            />
+            <div
+              className="absolute"
+              style={{
+                left: -3,
+                top: '32%',
+                width: 3,
+                height: '6%',
+                borderRadius: 2,
+                background: 'linear-gradient(90deg, #c0c4ca, #8a8f96)',
+              }}
+            />
+            <div
+              className="absolute"
+              style={{
+                left: -3,
+                top: '42%',
+                width: 3,
+                height: '6%',
+                borderRadius: 2,
+                background: 'linear-gradient(90deg, #c0c4ca, #8a8f96)',
+              }}
+            />
+          </>
         )}
-        {/* Screen well */}
         <div
           className="absolute overflow-hidden bg-black"
           style={{
-            inset: isPhone ? '1.6%' : '2.8%',
-            borderRadius: isPhone ? '19% / 9.5%' : '9% / 7%',
+            inset: isPhone ? '1.6%' : '2.2%',
+            borderRadius: isPhone ? '19% / 9.5%' : '6% / 7.5%',
             boxShadow: 'inset 0 0 0 1px rgba(0,0,0,0.65)',
           }}
         >
           <canvas ref={canvasRef} className="h-full w-full" />
-          {/* Glass sheen */}
           <div
             className="pointer-events-none absolute inset-0"
             style={{
