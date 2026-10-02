@@ -92,17 +92,18 @@ export function DeviceScene({ mode, asset, isMobile }: DeviceSceneProps) {
             gl.setClearColor(0x000000, 0)
           }}
         >
-          <ambientLight intensity={0.7} />
-          <directionalLight position={[3.2, 4.8, 2.4]} intensity={1.35} />
-          <directionalLight position={[-2.5, 1.5, -1]} intensity={0.4} color="#9ab8a8" />
+          <ambientLight intensity={0.45} />
+          <hemisphereLight args={['#e8eef5', '#1a1c18', 0.55]} />
+          <directionalLight position={[3.4, 5.2, 2.8]} intensity={1.55} color="#fff6ea" />
+          <directionalLight position={[-3.2, 2.4, 1.2]} intensity={0.55} color="#b8c4d8" />
+          <directionalLight position={[0.6, 1.2, -3.5]} intensity={0.65} color="#dfe7f2" />
           <spotLight
-            position={[-2.8, 2.2, 2]}
-            intensity={0.45}
-            angle={0.55}
-            penumbra={0.65}
+            position={[-2.4, 3.2, 2.4]}
+            intensity={0.55}
+            angle={0.5}
+            penumbra={0.7}
             color="#c8f07a"
           />
-          <hemisphereLight args={['#dce6df', '#0b1210', 0.4]} />
           <Suspense fallback={<SceneFallback />}>
             {/* ~30% smaller on-screen presence; framing/controls stay the same */}
             <group scale={0.7}>

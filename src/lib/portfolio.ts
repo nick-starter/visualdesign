@@ -362,20 +362,21 @@ export const SCREEN_ASSETS: ScreenAsset[] = [
   },
 ]
 
+/** Proportions tuned toward a modern iPhone (≈19.5:9) and portrait iPad. */
 export const DEVICE = {
   phone: {
-    width: 0.72,
-    height: 1.52,
-    depth: 0.09,
-    radius: 0.09,
-    bezel: 0.028,
+    width: 0.71,
+    height: 1.48,
+    depth: 0.078,
+    radius: 0.105,
+    bezel: 0.014,
   },
   tablet: {
-    width: 1.14,
-    height: 1.52,
-    depth: 0.07,
-    radius: 0.07,
-    bezel: 0.034,
+    width: 1.12,
+    height: 1.48,
+    depth: 0.062,
+    radius: 0.068,
+    bezel: 0.032,
   },
 } as const
 
