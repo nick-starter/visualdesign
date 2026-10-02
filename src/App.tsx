@@ -28,13 +28,13 @@ function App() {
         </div>
       </main>
 
-      {/* Controls — bottom center */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 flex justify-center px-4 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-8">
-        <div className="pointer-events-auto animate-rise flex flex-wrap items-center justify-center gap-3">
+      {/* Controls — bottom center (fixed so WebGL canvas cannot cover them) */}
+      <div className="pointer-events-none fixed inset-x-0 bottom-0 z-50 flex justify-center px-4 pb-[max(1.5rem,env(safe-area-inset-bottom))]">
+        <div className="pointer-events-auto flex flex-wrap items-center justify-center gap-3">
           <button
             type="button"
             onClick={() => setMode((m) => (m === 'phone' ? 'tablet' : 'phone'))}
-            className="rounded-full bg-[var(--lime)] px-5 py-2.5 text-sm font-semibold text-[var(--ink)] transition-transform hover:scale-[1.02] active:scale-[0.98]"
+            className="rounded-full bg-[#c8f07a] px-5 py-2.5 text-sm font-semibold text-[#070a09] shadow-[0_8px_28px_rgba(0,0,0,0.35)] transition-transform hover:scale-[1.02] active:scale-[0.98]"
           >
             {mode === 'phone' ? 'Morph to iPad' : 'Morph to phone'}
           </button>
@@ -45,7 +45,7 @@ function App() {
                 id === SCREEN_ASSETS[0].id ? SCREEN_ASSETS[1].id : SCREEN_ASSETS[0].id,
               )
             }
-            className="rounded-full border border-[color-mix(in_oklab,var(--fog)_22%,transparent)] bg-[color-mix(in_oklab,var(--ink)_55%,transparent)] px-5 py-2.5 text-sm font-medium text-[var(--fog)] backdrop-blur-sm transition-colors hover:border-[var(--lime)] hover:text-[var(--lime)]"
+            className="rounded-full border border-white/20 bg-black/50 px-5 py-2.5 text-sm font-medium text-[#dce6df] shadow-[0_8px_28px_rgba(0,0,0,0.35)] backdrop-blur-md transition-colors hover:border-[#c8f07a] hover:text-[#c8f07a]"
           >
             Swap case study
           </button>
