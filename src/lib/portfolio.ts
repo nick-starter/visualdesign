@@ -139,6 +139,7 @@ function paintAtlasPhone(ctx: CanvasRenderingContext2D, w: number, h: number) {
   ctx.fill()
 }
 
+/** Landscape tablet workspace UI (designed for ~1180×820). */
 function paintAtlasTablet(ctx: CanvasRenderingContext2D, w: number, h: number) {
   const g = ctx.createLinearGradient(0, 0, w, h)
   g.addColorStop(0, '#0E1412')
@@ -147,91 +148,79 @@ function paintAtlasTablet(ctx: CanvasRenderingContext2D, w: number, h: number) {
   ctx.fillRect(0, 0, w, h)
 
   ctx.fillStyle = '#8FA396'
-  ctx.font = '600 14px Manrope, system-ui, sans-serif'
-  ctx.fillText('ATLAS DESKTOP', 40, 64)
+  ctx.font = '600 13px Manrope, system-ui, sans-serif'
+  ctx.fillText('ATLAS DESKTOP', 36, 42)
   ctx.fillStyle = '#F4F7F2'
-  ctx.font = '700 42px Syne, system-ui, sans-serif'
-  ctx.fillText('Workspace overview', 40, 110)
+  ctx.font = '700 34px Syne, system-ui, sans-serif'
+  ctx.fillText('Workspace overview', 36, 82)
   ctx.fillStyle = '#8FA396'
-  ctx.font = '400 16px Manrope, system-ui, sans-serif'
-  ctx.fillText('Week of Mar 16 · 4 active projects', 40, 146)
+  ctx.font = '400 14px Manrope, system-ui, sans-serif'
+  ctx.fillText('Week of Mar 16 · 4 active projects', 36, 110)
 
-  fillRoundRect(ctx, 520, 72, 96, 40, 20)
+  fillRoundRect(ctx, w - 240, 48, 90, 36, 18)
   ctx.fillStyle = '#24302A'
   ctx.fill()
   ctx.fillStyle = '#C8F07A'
   ctx.font = '600 13px Manrope, system-ui, sans-serif'
-  ctx.fillText('Filter', 548, 97)
+  ctx.fillText('Filter', w - 212, 71)
 
-  fillRoundRect(ctx, 628, 72, 100, 40, 20)
+  fillRoundRect(ctx, w - 136, 48, 100, 36, 18)
   ctx.fillStyle = '#C8F07A'
   ctx.fill()
   ctx.fillStyle = '#0B1210'
   ctx.font = '700 13px Manrope, system-ui, sans-serif'
-  ctx.fillText('New task', 648, 97)
+  ctx.fillText('New task', w - 116, 71)
 
-  const card = ctx.createLinearGradient(40, 188, 370, 448)
+  // Left primary card + metrics row
+  const card = ctx.createLinearGradient(36, 140, 360, 360)
   card.addColorStop(0, '#254436')
   card.addColorStop(1, '#1A2E28')
-  fillRoundRect(ctx, 40, 188, 330, 260, 32)
+  fillRoundRect(ctx, 36, 140, 340, 210, 28)
   ctx.fillStyle = card
   ctx.fill()
   ctx.fillStyle = '#C8F07A'
-  ctx.font = '600 13px Manrope, system-ui, sans-serif'
-  ctx.fillText('PRIMARY', 68, 240)
+  ctx.font = '600 12px Manrope, system-ui, sans-serif'
+  ctx.fillText('PRIMARY', 60, 178)
   ctx.fillStyle = '#F4F7F2'
-  ctx.font = '700 30px Syne, system-ui, sans-serif'
-  ctx.fillText('Brand systems', 68, 288)
+  ctx.font = '700 28px Syne, system-ui, sans-serif'
+  ctx.fillText('Brand systems', 60, 218)
   ctx.fillStyle = '#B7C8BC'
-  ctx.font = '400 15px Manrope, system-ui, sans-serif'
-  ctx.fillText('Token audit · component map', 68, 324)
-  fillRoundRect(ctx, 68, 360, 180, 10, 5)
+  ctx.font = '400 14px Manrope, system-ui, sans-serif'
+  ctx.fillText('Token audit · component map', 60, 248)
+  fillRoundRect(ctx, 60, 278, 200, 10, 5)
   ctx.fillStyle = '#1A2420'
   ctx.fill()
-  fillRoundRect(ctx, 68, 360, 126, 10, 5)
+  fillRoundRect(ctx, 60, 278, 140, 10, 5)
   ctx.fillStyle = '#C8F07A'
   ctx.fill()
   ctx.fillStyle = '#8FA396'
-  ctx.font = '400 13px Manrope, system-ui, sans-serif'
-  ctx.fillText('70% complete', 68, 400)
+  ctx.font = '400 12px Manrope, system-ui, sans-serif'
+  ctx.fillText('70% complete', 60, 312)
 
-  fillRoundRect(ctx, 398, 188, 330, 120, 28)
-  ctx.fillStyle = '#1A2420'
-  ctx.fill()
-  ctx.fillStyle = '#8FA396'
-  ctx.font = '400 13px Manrope, system-ui, sans-serif'
-  ctx.fillText('Team load', 426, 236)
+  const metrics = [
+    { x: 396, label: 'Team load', value: '68%', accent: '#F4F7F2' },
+    { x: 596, label: 'Shipped', value: '12', accent: '#F4F7F2' },
+    { x: 796, label: 'Blocked', value: '2', accent: '#E8C27A' },
+  ]
+  for (const m of metrics) {
+    fillRoundRect(ctx, m.x, 140, 180, 100, 24)
+    ctx.fillStyle = '#1A2420'
+    ctx.fill()
+    ctx.fillStyle = '#8FA396'
+    ctx.font = '400 12px Manrope, system-ui, sans-serif'
+    ctx.fillText(m.label, m.x + 22, 178)
+    ctx.fillStyle = m.accent
+    ctx.font = '700 32px Syne, system-ui, sans-serif'
+    ctx.fillText(m.value, m.x + 22, 218)
+  }
+
+  // Landscape board — three columns across the remaining width
   ctx.fillStyle = '#F4F7F2'
-  ctx.font = '700 36px Syne, system-ui, sans-serif'
-  ctx.fillText('68%', 426, 278)
-
-  fillRoundRect(ctx, 398, 328, 158, 120, 28)
-  ctx.fillStyle = '#1A2420'
-  ctx.fill()
-  ctx.fillStyle = '#8FA396'
-  ctx.font = '400 13px Manrope, system-ui, sans-serif'
-  ctx.fillText('Shipped', 422, 376)
-  ctx.fillStyle = '#F4F7F2'
-  ctx.font = '700 32px Syne, system-ui, sans-serif'
-  ctx.fillText('12', 422, 416)
-
-  fillRoundRect(ctx, 570, 328, 158, 120, 28)
-  ctx.fillStyle = '#1A2420'
-  ctx.fill()
-  ctx.fillStyle = '#8FA396'
-  ctx.font = '400 13px Manrope, system-ui, sans-serif'
-  ctx.fillText('Blocked', 594, 376)
-  ctx.fillStyle = '#E8C27A'
-  ctx.font = '700 32px Syne, system-ui, sans-serif'
-  ctx.fillText('2', 594, 416)
-
-  ctx.fillStyle = '#F4F7F2'
-  ctx.font = '600 22px Syne, system-ui, sans-serif'
-  ctx.fillText('Board', 40, 510)
+  ctx.font = '600 18px Syne, system-ui, sans-serif'
+  ctx.fillText('Board', 36, 392)
 
   const columns = [
     {
-      x: 40,
       title: 'BACKLOG',
       color: '#8FA396',
       cards: [
@@ -240,7 +229,6 @@ function paintAtlasTablet(ctx: CanvasRenderingContext2D, w: number, h: number) {
       ],
     },
     {
-      x: 280,
       title: 'IN PROGRESS',
       color: '#C8F07A',
       cards: [
@@ -249,7 +237,6 @@ function paintAtlasTablet(ctx: CanvasRenderingContext2D, w: number, h: number) {
       ],
     },
     {
-      x: 520,
       title: 'REVIEW',
       color: '#8FA396',
       cards: [
@@ -258,28 +245,30 @@ function paintAtlasTablet(ctx: CanvasRenderingContext2D, w: number, h: number) {
       ],
     },
   ]
-
-  for (const col of columns) {
-    const colW = col.x === 520 ? 208 : 220
-    fillRoundRect(ctx, col.x, 540, colW, 360, 24)
+  const colGap = 18
+  const colW = (w - 72 - colGap * 2) / 3
+  columns.forEach((col, index) => {
+    const x = 36 + index * (colW + colGap)
+    fillRoundRect(ctx, x, 412, colW, h - 448, 22)
     ctx.fillStyle = '#1A2420'
     ctx.fill()
     ctx.fillStyle = col.color
-    ctx.font = '600 13px Manrope, system-ui, sans-serif'
-    ctx.fillText(col.title, col.x + 24, 580)
+    ctx.font = '600 12px Manrope, system-ui, sans-serif'
+    ctx.fillText(col.title, x + 20, 444)
     col.cards.forEach((cardItem, i) => {
-      const y = 608 + i * 88
-      fillRoundRect(ctx, col.x + 24, y, colW - 48, i === 0 && col.title === 'IN PROGRESS' ? 88 : 72, 16)
-      ctx.fillStyle = i === 0 && col.title === 'IN PROGRESS' ? '#254436' : '#24302A'
+      const y = 468 + i * 86
+      const active = index === 1 && i === 0
+      fillRoundRect(ctx, x + 16, y, colW - 32, 70, 14)
+      ctx.fillStyle = active ? '#254436' : '#24302A'
       ctx.fill()
       ctx.fillStyle = '#F4F7F2'
       ctx.font = '600 14px Manrope, system-ui, sans-serif'
-      ctx.fillText(cardItem[0], col.x + 40, y + 32)
+      ctx.fillText(cardItem[0], x + 32, y + 30)
       ctx.fillStyle = '#8FA396'
       ctx.font = '400 12px Manrope, system-ui, sans-serif'
-      ctx.fillText(cardItem[1], col.x + 40, y + 54)
+      ctx.fillText(cardItem[1], x + 32, y + 52)
     })
-  }
+  })
 }
 
 function paintMeridianPhone(ctx: CanvasRenderingContext2D, w: number, h: number) {
@@ -362,7 +351,7 @@ export const SCREEN_ASSETS: ScreenAsset[] = [
   },
 ]
 
-/** Proportions tuned toward a modern iPhone (≈19.5:9) and portrait iPad. */
+/** Proportions: modern iPhone (≈19.5:9) and landscape iPad (≈4:3). */
 export const DEVICE = {
   phone: {
     width: 0.71,
@@ -372,12 +361,18 @@ export const DEVICE = {
     bezel: 0.014,
   },
   tablet: {
-    width: 1.12,
-    height: 1.48,
-    depth: 0.062,
-    radius: 0.068,
-    bezel: 0.032,
+    width: 1.52,
+    height: 1.1,
+    depth: 0.052,
+    radius: 0.052,
+    bezel: 0.026,
   },
+} as const
+
+/** Canvas sizes for painted screens */
+export const SCREEN_SIZE = {
+  phone: { w: 390, h: 844 },
+  tablet: { w: 1180, h: 820 },
 } as const
 
 export function lerp(a: number, b: number, t: number) {
